@@ -1,0 +1,10 @@
+service: bitpazaar-lambdas
+frameworkVersion: "3"
+provider:
+  name: aws
+  runtime: nodejs18.x
+package:
+  individually: true
+functions:
+  generateBitPazaarAccessKey:
+    handler: lambdas/generateBitPazaarAccessKey.handler

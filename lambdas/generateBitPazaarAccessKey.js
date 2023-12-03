@@ -14,18 +14,19 @@ const types = {
 	]
 };
 
-const authPayload = {
-	walletAddress: 'TBD',
-	action: 'auth'
-};
-
 module.exports.handler = async (event) => {
-	console.log('Running');
+	const eventParams = event.queryStringParameters;
 
-  return {
-    statusCode: 200,
-    body: {
-        message: 'Hi!'
-    },
-  };
+	const authPayload = {
+		walletAddress: eventParams.walletAddress,
+		action: 'auth',
+		block: eventParams.block
+	};
+
+    const recoveredAddress = ethers.verifyTypedData(domain, types, authPayload, eventParams.signature); // The good stuff
+
+	return {
+		statusCode: 200,
+		body: {recoveredAddress},
+	};
 };

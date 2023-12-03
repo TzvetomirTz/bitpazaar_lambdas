@@ -4,6 +4,8 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: eu-west-2
+  environment:
+    STAGE: ${opt:stage, 'mainnet'}
 package:
   individually: true
 functions:

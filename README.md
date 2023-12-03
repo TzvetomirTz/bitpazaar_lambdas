@@ -1,8 +1,12 @@
 # bitpazaar_lambdas
 This project contains all the serverless functions consumed by the BitPazaar project.
 ### Dev commands cheat sheet
+Run all unit tests:
+> npx mocha
+
 Invoke function locally:
-> serverless invoke --local -f __functionName__
+> serverless invoke local --stage mainnet -f __functionName__
+> serverless invoke local --stage mainnet -f generateBitPazaarAccessKey --data '{ "queryStringParameters": {"name":"Namethon"}}'
 
 Invoke function on aws:
 > serverless invoke -f __functionName__

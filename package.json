@@ -9,6 +9,7 @@
   "author": "Tzvetomir Tzvetkov",
   "license": "MIT",
   "dependencies": {
-    "ethers": "^6.8.1"
+    "ethers": "^6.8.1",
+    "mocha": "^10.2.0"
   }
 }

@@ -10,7 +10,8 @@ const domain = {
 const types = {
 	Auth: [
 		{ name: 'walletAddress', type: 'address' },
-		{ name: 'action', type: 'string' }
+		{ name: 'action', type: 'string' },
+		{ name: 'block', type: 'uint256'}
 	]
 };
 

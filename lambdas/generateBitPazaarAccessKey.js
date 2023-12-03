@@ -24,7 +24,11 @@ module.exports.handler = async (event) => {
 		block: eventParams.block
 	};
 
-    const recoveredAddress = ethers.verifyTypedData(domain, types, authPayload, eventParams.signature); // The good stuff
+    const recoveredAddress = ethers.verifyTypedData(domain, types, authPayload, eventParams.signature);
+
+	if(recoveredAddress !== eventParams.walletAddress) {
+		throw new Error("Recovered address didn't match signer address.");
+	}
 
 	return {
 		statusCode: 200,

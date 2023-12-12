@@ -2,6 +2,7 @@
 
 const { ethers } = require("ethers");
 const AWS = require('aws-sdk');
+const base64url = require('base64url');
 
 AWS.config.update({ region: 'eu-west-2' });
 
@@ -21,6 +22,8 @@ const types = {
 };
 
 module.exports.handler = async (event) => {
+
+	// Verify auth payload was really signed by the said address
 	const eventParams = event.queryStringParameters;
 	const kms = new AWS.KMS();
 
@@ -36,22 +39,37 @@ module.exports.handler = async (event) => {
 		throw new Error("Recovered address didn't match signer address."); // ToDo: return code 400 with message or whatevs
 	}
 
-	const header = Buffer.from(JSON.stringify({alg: "RSASSA_PKCS1_V1_5_SHA_256", typ: "JWT"})).toString("base64url");
-	const body = Buffer.from(JSON.stringify({address: recoveredAddress})).toString("base64url");
+	// Issue JWT token
 
-	const message = Buffer.from(header + "." + body);
+	let header = {
+		"alg": "RS256",
+		"typ": "JWT"
+	};
+	
+	let payload = {
+		address: recoveredAddress,
+		validBefore: 1
+	};
 
-	const signature = await kms.sign({
-		KeyId: AWS_KMS_KEY_ID,
+	let token_components = {
+		header: base64url(JSON.stringify(header)),
+		payload: base64url(JSON.stringify(payload)),
+	};
+
+	let message = Buffer.from(token_components.header + "." + token_components.payload);
+
+	let res = await kms.sign({
 		Message: message,
-		SigningAlgorithm: "RSASSA_PKCS1_V1_5_SHA_256",
-		MessageType: "RAW"
+		KeyId: AWS_KMS_KEY_ID,
+		SigningAlgorithm: 'RSASSA_PKCS1_V1_5_SHA_256',
+		MessageType: 'RAW'
 	}).promise();
 
-	console.log(`${header}.${body}.${signature.Signature.toString("base64url")}`);
+	token_components.signature = res.Signature.toString("base64url");
+	const token = token_components.header + "." + token_components.payload + "." + token_components.signature;
 
 	return {
 		statusCode: 200,
-		body: {recoveredAddress},
+		body: {recoveredAddress, token},
 	};
 };

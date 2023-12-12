@@ -13,3 +13,4 @@ Invoke function on aws:
 
 Deploy function to aws:
 > serverless deploy
+> serverless deploy --stage mainnet

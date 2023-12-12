@@ -69,7 +69,9 @@ module.exports.handler = async (event) => {
 	const token = token_components.header + "." + token_components.payload + "." + token_components.signature;
 
 	return {
-		statusCode: 200,
-		body: {recoveredAddress, token},
+		"isBase64Encoded": false,
+		"statusCode": 200,
+		"headers": {},
+		"body": JSON.stringify({recoveredAddress, token}),
 	};
 };

@@ -16,8 +16,9 @@ describe('Base Gen BitP Acs Key', () => {
                 }
             };
 
-            const res = await generateBitPazaarAccessKey(event);
-            assert.equal(walletAddress, res.body.recoveredAddress);
+            const resStr = await generateBitPazaarAccessKey(event);
+            const resBody = JSON.parse(resStr.body);
+            assert.equal(walletAddress, resBody.recoveredAddress);
         });
     });
 });

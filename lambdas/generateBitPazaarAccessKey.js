@@ -81,6 +81,11 @@ module.exports.handler = async (event) => {
 
 	return {
 		"isBase64Encoded": false,
+		'headers': {
+			"Access-Control-Allow-Origin": "http://localhost:3000",
+			"Access-Control-Allow-Headers": "Content-Type",
+			"Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+		},
 		"statusCode": 200,
 		"body": JSON.stringify({acsToken: token}),
 	};

@@ -7,3 +7,6 @@ jspm_packages
 
 # Others
 .DS_Store
+
+# Funny part starts here
+.env

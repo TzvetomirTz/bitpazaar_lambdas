@@ -87,6 +87,6 @@ module.exports.handler = async (event) => {
 			"Access-Control-Allow-Methods": "OPTIONS,POST,GET"
 		},
 		"statusCode": 200,
-		"body": JSON.stringify({acsToken: token}),
+		"body": JSON.stringify({ acsToken: token }),
 	};
 };

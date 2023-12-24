@@ -11,3 +11,5 @@ package:
 functions:
   generateBitPazaarAccessKey:
     handler: lambdas/generateBitPazaarAccessKey.handler
+  getNftsByOwner:
+    handler: lambdas/getNftsByOwner.handler

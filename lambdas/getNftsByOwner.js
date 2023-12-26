@@ -1,6 +1,7 @@
 'use strict';
 
 const { Alchemy, Network } = require("alchemy-sdk");
+const { verifyAndDecodeJwt, extractTokenFromBearer } = require('../libs/auth');
 
 const alchApiKey = process.env.ALCHEMY_API_KEY;
 
@@ -12,7 +13,10 @@ const config = {
 const alchemy = new Alchemy(config);
 
 module.exports.handler = async (event) => {
-	console.log(JSON.stringify(event));
+	const encodedAuthToken = extractTokenFromBearer(event.headers.Authorization);
+	const authToken = verifyAndDecodeJwt(encodedAuthToken);
+
+	console.log(authToken);
 
 	const eventParams = event.queryStringParameters;
     const response = await alchemy.nft.getNftsForOwner(eventParams.address);

@@ -2,12 +2,12 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 
 const verifyAndDecodeJwt = (token) => {
-    let cert = fs.readFileSync('./resources/auth_public_key');
+    let pubKey = fs.readFileSync('./resources/auth_public_key');
     let decodedToken;
 
-	jwt.verify(token, cert, function (err, decoded) {
+	jwt.verify(token, pubKey, (err, decoded) => {
 		if (err) {
-			console.error("Error", err);
+			throw err;
 		}
 
         decodedToken = decoded;
@@ -16,4 +16,9 @@ const verifyAndDecodeJwt = (token) => {
     return decodedToken;
 };
 
+const extractTokenFromBearer = (bearer) => {
+	return bearer.split("Bearer ")[1];
+};
+
 module.exports.verifyAndDecodeJwt = verifyAndDecodeJwt;
+module.exports.extractTokenFromBearer = extractTokenFromBearer;

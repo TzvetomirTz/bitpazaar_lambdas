@@ -14,9 +14,7 @@ const alchemy = new Alchemy(config);
 
 module.exports.handler = async (event) => {
 	const encodedAuthToken = extractTokenFromBearer(event.headers.Authorization);
-	const authToken = verifyAndDecodeJwt(encodedAuthToken);
-
-	console.log(authToken);
+	verifyAndDecodeJwt(encodedAuthToken);
 
 	const eventParams = event.queryStringParameters;
     const response = await alchemy.nft.getNftsForOwner(eventParams.address);

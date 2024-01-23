@@ -13,3 +13,5 @@ functions:
     handler: lambdas/generateBitPazaarAccessKey.handler
   getNftsByOwner:
     handler: lambdas/getNftsByOwner.handler
+  getNftMetadata:
+    handler: lambdas/getNftMetadata.handler

@@ -8,6 +8,7 @@ Invoke function locally:
 > serverless invoke local --stage mainnet -f __functionName__
 > serverless invoke local --stage mainnet -f generateBitPazaarAccessKey --data '{ "queryStringParameters": {"name":"Namethon"}}'
 > serverless invoke local --stage mainnet -f getNftsByOwner --data '{ "queryStringParameters": {"address":"__address__"}, "headers": {"Authorization": "Bearer __jwt__"}}'
+> serverless invoke local --stage mainnet -f getNftMetadata --data '{ "queryStringParameters": {"contractAddress": "__address__", "tokenId": __id__}, "headers": {"Authorization": "Bearer __jwt__"}}'
 
 Invoke function on aws:
 > serverless invoke -f __functionName__

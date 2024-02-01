@@ -13,7 +13,9 @@ Invoke Function Locally:
 
 > serverless invoke local --stage mainnet -f getNftMetadata --data '{ "queryStringParameters": {"contractAddress": "__address__", "tokenId": __id__}, "headers": {"Authorization": "Bearer __jwt__"}}'
 
-> serverless invoke local --stage mainnet -f searchForCollections --data '{ "queryStringParameters": {"searchStr": "poke"}, "headers": {"Authorization": "Bearer __jwt__"}}'
+> serverless invoke local --stage mainnet -f searchForCollections --data '{ "queryStringParameters": {"searchStr": "__search_string__"}, "headers": {"Authorization": "Bearer __jwt__"}}'
+
+> serverless invoke local --stage mainnet -f getNftRarity --data '{ "queryStringParameters": {"contractAddress": "__address__", "tokenId": __id__}, "headers": {"Authorization": "Bearer __jwt__"}}'
 
 Invoke Function on AWS:
 > serverless invoke -f __functionName__

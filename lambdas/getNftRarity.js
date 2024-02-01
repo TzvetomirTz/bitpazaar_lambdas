@@ -16,7 +16,7 @@ module.exports.handler = async (event) => {
 	verifyAndDecodeJwt(extractTokenFromBearer(event.headers.Authorization));
 
 	const eventParams = event.queryStringParameters;
-    const response = await alchemy.nft.getNftMetadata(eventParams.contractAddress, eventParams.tokenId);
+    const rarities = (await alchemy.nft.computeRarity(eventParams.contractAddress, eventParams.tokenId)).rarities;
 
     return {
 		"isBase64Encoded": false,
@@ -26,6 +26,6 @@ module.exports.handler = async (event) => {
 			"Access-Control-Allow-Methods": "OPTIONS,POST,GET"
 		},
 		"statusCode": 200,
-		"body": JSON.stringify({ nftData: response }),
+		"body": JSON.stringify({ rarities }),
 	};
 };

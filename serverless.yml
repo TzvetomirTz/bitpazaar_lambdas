@@ -17,3 +17,5 @@ functions:
     handler: lambdas/getNftMetadata.handler
   searchForCollections:
     handler: lambdas/searchForCollections.handler
+  getNftRarity:
+    handler: lambdas/getNftRarity.handler

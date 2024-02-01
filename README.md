@@ -4,13 +4,18 @@ This project contains all the serverless functions consumed by the BitPazaar pro
 Run all unit tests:
 > npx mocha
 
-Invoke function locally:
+Invoke Function Locally:
 > serverless invoke local --stage mainnet -f __functionName__
+
 > serverless invoke local --stage mainnet -f generateBitPazaarAccessKey --data '{ "queryStringParameters": {"name":"Namethon"}}'
+
 > serverless invoke local --stage mainnet -f getNftsByOwner --data '{ "queryStringParameters": {"address":"__address__"}, "headers": {"Authorization": "Bearer __jwt__"}}'
+
 > serverless invoke local --stage mainnet -f getNftMetadata --data '{ "queryStringParameters": {"contractAddress": "__address__", "tokenId": __id__}, "headers": {"Authorization": "Bearer __jwt__"}}'
 
-Invoke function on aws:
+> serverless invoke local --stage mainnet -f searchForCollections --data '{ "queryStringParameters": {"searchStr": "poke"}, "headers": {"Authorization": "Bearer __jwt__"}}'
+
+Invoke Function on AWS:
 > serverless invoke -f __functionName__
 
 Deploy function to aws:

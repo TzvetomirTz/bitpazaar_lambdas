@@ -15,3 +15,5 @@ functions:
     handler: lambdas/getNftsByOwner.handler
   getNftMetadata:
     handler: lambdas/getNftMetadata.handler
+  searchForCollections:
+    handler: lambdas/searchForCollections.handler

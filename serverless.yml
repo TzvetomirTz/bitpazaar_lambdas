@@ -19,3 +19,5 @@ functions:
     handler: lambdas/searchForCollections.handler
   getNftRarity:
     handler: lambdas/getNftRarity.handler
+  getCollectionRarityAttributes:
+    handler: lambdas/getCollectionRarityAttributes.handler

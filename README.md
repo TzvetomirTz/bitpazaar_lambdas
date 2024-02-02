@@ -19,6 +19,8 @@ Invoke Function Locally:
 
 > serverless invoke local --stage mainnet -f getCollectionRarityAttributes --data '{ "queryStringParameters": {"contractAddress": "__address__"}, "headers": {"Authorization": "Bearer __jwt__"}}'
 
+> serverless invoke local --stage mainnet -f getCollectionNfts --data '{ "queryStringParameters": {"contractAddress": "__address__", "startToken": __start_token_id__, "limit": __page_size__}, "headers": {"Authorization": "Bearer __jwt__"}}'
+
 Invoke Function on AWS:
 > serverless invoke -f __functionName__
 

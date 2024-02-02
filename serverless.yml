@@ -21,3 +21,5 @@ functions:
     handler: lambdas/getNftRarity.handler
   getCollectionRarityAttributes:
     handler: lambdas/getCollectionRarityAttributes.handler
+  getCollectionNfts:
+    handler: lambdas/getCollectionNfts.handler

@@ -17,7 +17,8 @@ module.exports.handler = async (event) => {
 	verifyAndDecodeJwt(encodedAuthToken);
 
 	const eventParams = event.queryStringParameters;
-    const response = await alchemy.nft.getNftsForOwner(eventParams.address);
+	const options = { "pageKey": eventParams.pageKey };
+    const response = await alchemy.nft.getNftsForOwner(eventParams.address, options);
 
     return {
 		"isBase64Encoded": false,
@@ -27,6 +28,6 @@ module.exports.handler = async (event) => {
 			"Access-Control-Allow-Methods": "OPTIONS,POST,GET"
 		},
 		"statusCode": 200,
-		"body": JSON.stringify({ nfts: response.ownedNfts, nftsCount: response.totalCount }),
+		"body": JSON.stringify({ nfts: response.ownedNfts, nftsCount: response.totalCount, pageKey: response.pageKey }),
 	};
 };

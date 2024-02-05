@@ -16,7 +16,7 @@ module.exports.handler = async (event) => {
 	verifyAndDecodeJwt(extractTokenFromBearer(event.headers.Authorization));
 
 	const eventParams = event.queryStringParameters;
-    const nfts = await alchemy.nft.getNftsForContract(eventParams.contractAddress, true, eventParams.startToken, eventParams.limit);
+    const nfts = (await alchemy.nft.getNftsForContract(eventParams.contractAddress, true, eventParams.startToken, eventParams.limit)).nfts;
 
     return {
 		"isBase64Encoded": false,

@@ -1,22 +1,23 @@
-'use strict';
+'use strict'
 
-const { Alchemy, Network } = require("alchemy-sdk");
-const { verifyAndDecodeJwt, extractTokenFromBearer } = require('../libs/auth');
+const { Alchemy, Network } = require("alchemy-sdk")
+const { verifyAndDecodeJwt, extractTokenFromBearer } = require('../libs/auth')
 
-const alchApiKey = process.env.ALCHEMY_API_KEY;
+const alchApiKey = process.env.ALCHEMY_API_KEY
 
 const config = {
     apiKey: alchApiKey,
     network: Network.ETH_MAINNET, // Todo: Parameterize for testnets testing
-};
+}
 
-const alchemy = new Alchemy(config);
+const alchemy = new Alchemy(config)
 
 module.exports.handler = async (event) => {
-	verifyAndDecodeJwt(extractTokenFromBearer(event.headers.Authorization));
+	verifyAndDecodeJwt(extractTokenFromBearer(event.headers.Authorization))
 
-	const eventParams = event.queryStringParameters;
-    const nfts = (await alchemy.nft.getNftsForContract(eventParams.contractAddress, true, eventParams.startToken, eventParams.limit)).nfts;
+	const eventParams = event.queryStringParameters
+	const params = { pageKey: eventParams.pageKey }
+	const collectionPage = await alchemy.nft.getNftsForContract(eventParams.contractAddress, params)
 
     return {
 		"isBase64Encoded": false,
@@ -26,6 +27,6 @@ module.exports.handler = async (event) => {
 			"Access-Control-Allow-Methods": "OPTIONS,POST,GET"
 		},
 		"statusCode": 200,
-		"body": JSON.stringify({ nfts }),
-	};
-};
+		"body": JSON.stringify({ collectionPage }),
+	}
+}
